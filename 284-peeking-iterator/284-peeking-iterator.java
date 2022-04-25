@@ -4,12 +4,10 @@ class PeekingIterator implements Iterator<Integer> {
     Integer next = null;
     
 	public PeekingIterator(Iterator<Integer> iterator) {
-	    // initialize any member here.
 	    iter = iterator;
         if(hasNext()) next = iter.next();
 	}
 	
-    // Returns the next element in the iteration without advancing the iterator.
 	public Integer peek() {
         return next;
 	}
