@@ -17,32 +17,24 @@ class Solution {
     // }
     
     
+
      public int lengthOfLIS(int[] nums) {
-         
          int n = nums.length;
-         
          ArrayList<Integer> al = new ArrayList<>();
-         
-         al.add(nums[0]);
-         
-         for(int i = 1;i<n;i++){
-             
-             if(nums[i] > al.get(al.size()-1)){
+         // al.add(nums[0]);
+        int ans= 0;
+         for(int i = 0;i<n;i++){
+             if( al.isEmpty() || nums[i] > al.get(al.size()-1) ){
                  al.add(nums[i]);
+                 ans++;
              }else{
-                 
                  int pos =  Collections.binarySearch(al,nums[i]);
                  if(pos<0){
                      pos = Math.abs(pos+1);
                         al.set(pos,nums[i]);
                  }
-                
-                    
-             }
-             
+             }  
          }
-         
-         return al.size();
-         
+         return ans;
      }
 }
