@@ -33,7 +33,6 @@ class Solution {
         }
         int ans = Integer.MIN_VALUE;
         for(int i = 0;i<n;i++){
-            
             int ret  = h[i] * (rse[i] -lse[i] - 1);
             ans = Math.max(ret,ans);
         }
