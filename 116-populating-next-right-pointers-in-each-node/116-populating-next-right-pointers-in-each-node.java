@@ -28,23 +28,17 @@ class Solution {
         prev.add(root);
         prev.add(null);
         while(prev.peek()!=null){
-            // curr.clear();
-            // System.out.println(prev);
-        // Queue<Node> curr = new LinkedList<>();
-            while(prev.size()!=0){
-                   // System.out.println(prev);
+            
                 Node out = prev.poll();           
                 if(out.left!=null)prev.add(out.left);
                 if(out.right!=null)prev.add(out.right);
                 if(prev.peek()==null){
                     out.next = null;
                     prev.poll();
-                    break;
+                    prev.add(null);
                 }else out.next = prev.peek();
-            }
-                prev.add(null);
-               // System.out.println(curr);
-            // prev = curr;
+            
+                
         }
         return root;
     }
