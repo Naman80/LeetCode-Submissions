@@ -28,7 +28,7 @@ class Solution
     //Function to find position of first set bit in the given number.
     public static int getFirstSetBit(int n){
             
-        for(int i = 0; i<=31;i++){
+        for(int i = 0; i<=100;i++){
             
             if(((n>> i) & 1) == 1)return i+1;
             
