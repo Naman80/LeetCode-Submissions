@@ -4,8 +4,7 @@ class Solution {
         int max = Integer.MIN_VALUE;
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                int ans = Math.max(solve(i,j,matrix ,new boolean[matrix.length][matrix[0].length],dp),
-                        solve2(i,j,matrix,new boolean[matrix.length][matrix[0].length],dp));
+                int ans = solve(i,j,matrix ,new boolean[matrix.length][matrix[0].length],dp);
                 max = Math.max(max,ans);
             }
 
@@ -18,9 +17,6 @@ class Solution {
 
     static int solve(int r,int c,int[][] mat,boolean[][] visit,int[][] dp){
 
-//        if(r== mat.length-1 && c== mat[0].length-1){
-//            return 1;
-//        }
             if(dp[r][c] !=0) return dp[r][c];
         int up = 1;
         int right = 1;
@@ -57,10 +53,6 @@ class Solution {
 
     }
     static int solve2(int r,int c,int[][] mat,boolean[][] visit,int[][] dp){
-
-//        if(r== mat.length-1 && c== mat.length-1){
-//            return 1;
-//        }
 
         if(dp[r][c] != 0)return dp[r][c];
         int up = 1;
