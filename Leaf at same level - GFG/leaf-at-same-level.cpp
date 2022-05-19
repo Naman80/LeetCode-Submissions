@@ -111,7 +111,7 @@ class Solution{
         
         if(left.first == false || right.first == false) return make_pair(false,0);
         
-        if(left.second == right.second || left.first==true || right.first==true ) return make_pair(true,max(left.second, right.second)+1);
+        if(left.second == right.second || left.second==0 || right.second==0 ) return make_pair(true,max(left.second, right.second)+1);
         else return make_pair(false,0);
     }
     bool check(Node *root)
