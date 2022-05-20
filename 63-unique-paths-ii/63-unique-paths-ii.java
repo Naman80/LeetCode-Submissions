@@ -5,7 +5,7 @@ class Solution {
         int n = mat[0].length;
         int[][] dp = new int[m][n];
         for(int[] x:dp)Arrays.fill(x,-1);
-        return solve(0,0,mat,new boolean[m][n],dp);
+        return solve(0,0,mat,dp);
 //          if(mat[0][0]==1 || mat[m-1][n-1]==1) return 0;
 //         int[][] dp = new int[m][n];
 //         for(int i = 0;i<m;i++){
@@ -24,20 +24,19 @@ class Solution {
 //         return dp[0][0];
     }
     
-    static int solve(int r,int c,int[][] mat,boolean[][] visit,int[][] dp){
+    static int solve(int r,int c,int[][] mat,int[][] dp){
         
         if(mat[r][c]==1)return 0;
         if(dp[r][c] != -1)return dp[r][c];
         if(r==mat.length-1 && c ==  mat[0].length-1)return 1;
         int down = 0;int right = 0;
-        visit[r][c] = true;
-        if(r+1 < mat.length && !visit[r+1][c]){
-            down = solve(r+1,c,mat,visit,dp);
+        // visit[r][c] = true;
+        if(r+1 < mat.length ){
+            down = solve(r+1,c,mat,dp);
         }
-        if(c+1 <mat[0].length && !visit[r][c+1]){
-            right = solve(r,c+1,mat,visit,dp);
+        if(c+1 <mat[0].length){
+            right = solve(r,c+1,mat,dp);
         }
-        visit[r][c] = false;
         return dp[r][c] = down+right;        
     }
 }
