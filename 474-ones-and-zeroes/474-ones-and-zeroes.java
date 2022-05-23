@@ -4,9 +4,8 @@ class Solution {
         Integer[][][] dp = new Integer[len][m+1][n+1];
         return solve(0,m,n,strs,dp);
     }
-    
     int solve(int idx, int m , int n, String[] arr,Integer[][][] dp){
-        if(m<0 || n < 0)return 0;
+        // if(m<0 || n < 0)return 0;
         if(idx==arr.length)return 0;
         if(dp[idx][m][n] != null)return dp[idx][m][n];
         String s = arr[idx];
