@@ -1,22 +1,27 @@
 class Solution {
 public:
-    int f(int idx, int prev_idx, int n, vector<vector<int>>&dp, vector<int>&nums){
-        if(idx==n){
+     int solve(vector<int>&nums, int i, int prev, vector<vector<int>>&dp){
+        if(i>=nums.size()){
             return 0;
         }
-        if(dp[idx][prev_idx+1]!=-1){
-            return dp[idx][prev_idx+1];
+       
+        if(dp[i][prev+1]!=-1){
+            return dp[i][prev+1];
         }
-        int not_take=0+f(idx+1,prev_idx,n,dp,nums);
-        int take=INT_MIN;
-        if(prev_idx==-1 || nums[idx]>nums[prev_idx]){
-            take=1+f(idx+1,idx,n,dp,nums);
+        int pick = 0;
+        if(prev==-1 || nums[i]>nums[prev]){
+            pick = 1 + solve(nums,i+1,i,dp);
         }
-        return dp[idx][prev_idx+1]=max(take,not_take);
+        int nonPick = solve(nums,i+1,prev,dp);
+        dp[i][prev+1] = max(pick,nonPick);
+        return dp[i][prev+1];
     }
-    int lengthOfLIS(vector<int>& nums) {
-        int n=nums.size();
-        vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
-        return f(0,-1,n,dp,nums);
+   
+    int lengthOfLIS(vector<int>&nums){
+        int i = 0;
+        int prev = -1;
+        vector<vector<int>>dp(nums.size()+1,vector<int>(nums.size()+1,-1));
+        int ans = solve(nums,i,prev,dp);
+        return ans;
     }
 };
