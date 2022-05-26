@@ -33,52 +33,70 @@ class DriverClass {
 class Solution {
     // Function to detect cycle in a directed graph.
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
+        // boolean[] visit = new boolean[V];
         
+        // boolean[] rec = new boolean[V];
         
-        boolean[] visit = new boolean[V];
-        
-        boolean[] rec = new boolean[V];
-        
-        for(int i = 0 ; i < V;i++){
+        // for(int i = 0 ; i < V;i++){
             
-            if(!visit[i]){
-                
-                if(dfs( i , adj,visit,rec))return true;
+        //     if(!visit[i]){
+        //         if(dfs( i , adj,visit,rec))return true;
+        //     }
+        // }
+        // return false;
+         int[] indegree = new int[V];
+        
+        //calculate in-degree
+        for(int i = 0 ;i <V;i++){
+            for(int x:adj.get(i)){
+                indegree[x]++;
             }
-            
         }
         
-        return false;
-        
+        ArrayList<Integer> al = new ArrayList<>();
+      return  bfs(V,adj,indegree,al);
         
     }
     
-    boolean dfs(int v, ArrayList<ArrayList<Integer>> adj,boolean[] vis,boolean[] rec){
+    // boolean dfs(int v, ArrayList<ArrayList<Integer>> adj,boolean[] vis,boolean[] rec){
+    //     vis[v] = true;
+    //     rec[v] = true;
+    //     for(int x : adj.get(v)){
+    //         if(!vis[x]){
+    //             if(dfs(x,adj,vis,rec))return true;
+    //         }else if(rec[x]) return true;
+    //     }
+    //     rec[v] = false;
+    //     return false;
+    // }
+    
+    static boolean bfs(int V, ArrayList<ArrayList<Integer>> adj,int[] indeg,ArrayList<Integer>al){
         
         
-        vis[v] = true;
-        rec[v] = true;
+        Queue<Integer> q = new LinkedList<>();
         
-        
-        for(int x : adj.get(v)){
+        for(int i = 0; i<V;i++){
+            if(indeg[i] == 0 ){
+                q.add(i);
+            }
+        }
+        int count = 0;
+        while(q.size()!=0){
             
-            if(!vis[x]){
-                if(dfs(x,adj,vis,rec))return true;
-            }else if(rec[x]) return true;
+            int out = q.poll();
+            al.add(out);
+            
+            for(int x : adj.get(out)){
+                if(--indeg[x]==0){
+                    q.add(x);
+                }
+            }
+            count++;
             
         }
         
-        rec[v] = false;
-        
-        return false;
-        
-        
-        
-        
-        
+        return count!=V;
         
     }
-    
-    
     
 }
