@@ -54,18 +54,32 @@ class Solution
     {
         //[[[1,5],[2,1]],[[0,5],[2,3]],[[1,3],[0,1]]];
         PriorityQueue<Pair> q = new PriorityQueue<>();
-        q.add(new Pair(1,0));
+        q.add(new Pair(0,0));
         int sum = 0;
         boolean[] vis = new boolean[V];
+        int[] key = new int[V];
+        int[] parent = new int[V];
+        Arrays.fill(key,Integer.MAX_VALUE);
+        key[0] = 0;
+        parent[0] = -1;
         while(q.size()!=0){
             Pair out = q.poll();
             if(!vis[out.v]){
                 sum+= out.w;
                 ArrayList<ArrayList<Integer>> neighbours = adj.get(out.v);
                 for(ArrayList<Integer> al : neighbours){
-                    if(!vis[al.get(0)]){
-                        Pair in = new Pair(al.get(0),al.get(1));
-                        q.add(in);
+                    // System.out.println(al);
+                    int vert = al.get(0);
+                    int wght = al.get(1);
+                    if(!vis[vert]){
+                        // System.out.println(vert +  "  " + wght);
+                        Pair in = new Pair(vert,wght);
+                        if(key[vert] > wght){
+                            parent[vert] = out.v;
+                            key[vert] = wght;
+                            q.add(in);
+                        }
+                       
                     }
                 }
                 vis[out.v] = true;
