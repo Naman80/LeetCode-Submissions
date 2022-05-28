@@ -40,7 +40,7 @@ class Solution {
        for(int i = 0;i<V;i++){
            
            if(!vis[i]){
-               if(dfs(i,adj,vis,-1)) return true;
+               if(bfs(i,adj,vis)) return true;
            }
            
        }
@@ -50,19 +50,46 @@ class Solution {
     }
     
     
-    boolean dfs(int v,ArrayList<ArrayList<Integer>> adj,boolean[] vis ,int parent){
+    // boolean dfs(int v,ArrayList<ArrayList<Integer>> adj,boolean[] vis ,int parent){
         
+        
+    //     vis[v] = true;
+        
+    //     for(int x : adj.get(v)){
+    //         if(!vis[x]){
+    //             if(dfs(x,adj,vis,v)) return true;
+    //         }else if(parent != x) return true;
+    //     }
+        
+        
+    //     return false;
+        
+    // }
+    
+     boolean bfs(int v,ArrayList<ArrayList<Integer>> adj,boolean[] vis){
+    
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[]{v,-1});
         
         vis[v] = true;
         
-        for(int x : adj.get(v)){
-            if(!vis[x]){
-                if(dfs(x,adj,vis,v)) return true;
-            }else if(parent != x) return true;
+        while(!q.isEmpty()){
+            
+            int[] node = q.poll();
+            
+            for(int x:adj.get(node[0])){
+                
+                if(!vis[x]){
+                    vis[x] = true;
+                    q.add(new int[]{x,node[0]});
+                }else if(x != node[1]) return true;
+                
+            }
+            
         }
-        
         
         return false;
         
-    }
+    
+     }
 }
