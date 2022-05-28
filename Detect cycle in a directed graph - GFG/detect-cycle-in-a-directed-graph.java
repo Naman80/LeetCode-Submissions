@@ -34,39 +34,93 @@ class Solution {
     // Function to detect cycle in a directed graph.
     public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj) {
        
-       boolean[] vis = new boolean[V];
-       boolean[] rec = new boolean[V];
+    //   boolean[] vis = new boolean[V];
+    // //   boolean[] rec = new boolean[V];
+    //   for(int i = 0 ; i < V;i++){
+           
+    //     //   if(!vis[i]){
+    //     //       if(dfs(i,adj,vis,rec)) return true;
+    //     //   }
+           
+    //   }
        
-       for(int i = 0 ; i < V;i++){
-           
-           if(!vis[i]){
-               if(dfs(i,adj,vis,rec)) return true;
+       int[] ind = new int[V];
+       for(int i = 0;i<V;i++){
+           for(int x :adj.get(i)){
+               ind[x]++;
            }
-           
        }
        
-       return false;
+       ArrayList<Integer> al = new ArrayList<>();
        
+       Queue<Integer> q = new LinkedList<>();
+       
+       for(int i = 0;i<V;i++){
+           if(ind[i]==0)q.add(i);
+       }
+       
+       int count = 0;
+       
+       while(!q.isEmpty()){
+           
+           int node = q.poll();
+           al.add(node);
+           
+           for(int x : adj.get(node)){
+               if(--ind[x] == 0)q.add(x);
+           }
+           count++;
+       }
+       if(count != V) return true;
+       else return false;
     }
     
-    boolean dfs(int v , ArrayList<ArrayList<Integer>> adj , boolean[] vis ,boolean[] recS){
+    // i can also use topological sort to find cycle in direct acyclic graph
+    
+    // boolean dfs(int v , ArrayList<ArrayList<Integer>> adj , boolean[] vis ,boolean[] recS){
         
+    //     vis[v] = true;
+        
+    //     recS[v] = true;
+        
+    //     for(int x : adj.get(v)){
+            
+    //         if(!vis[x]){
+    //             if(dfs(x,adj,vis,recS))return true;
+    //         }else if(recS[x]) return true;
+            
+    //     }
+        
+    //     recS[v] = false;
+        
+    //     return false;
+        
+        
+    // }
+    
+    boolean bfs (int v ,ArrayList<ArrayList<Integer>> adj , boolean[] vis ,boolean[] recS){
+        
+        Queue<Integer> q = new LinkedList<>();
+        q.add(v);
         vis[v] = true;
-        
         recS[v] = true;
         
-        for(int x : adj.get(v)){
+        while(!q.isEmpty()){
             
-            if(!vis[x]){
-                if(dfs(x,adj,vis,recS))return true;
-            }else if(recS[x]) return true;
+            int node = q.poll();
+            
+            for(int x : adj.get(node)){
+                
+                if(!vis[x]){
+                    vis[x] = true;
+                    recS[x] = true;
+                    q.add(x);
+                }else if(recS[x]) return true;
+                
+            }
             
         }
         
-        recS[v] = false;
-        
         return false;
-        
-        
     }
 }
