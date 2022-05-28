@@ -62,10 +62,12 @@ class Solution
             if(!vis[out.v]){
                 sum+= out.w;
                 ArrayList<ArrayList<Integer>> neighbours = adj.get(out.v);
-            
                 for(ArrayList<Integer> al : neighbours){
-                    Pair in = new Pair(al.get(0),al.get(1));
-                    q.add(in);
+                    if(!vis[al.get(0)]){
+                        Pair in = new Pair(al.get(0),al.get(1));
+                        q.add(in);
+                    }
+                   
                 }
                 vis[out.v] = true;
             }
