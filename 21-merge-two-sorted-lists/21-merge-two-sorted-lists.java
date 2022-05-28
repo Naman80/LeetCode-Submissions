@@ -28,16 +28,10 @@ class Solution {
             
         }
         
-        while(list1 !=null){
-               temp.next = list1;
-                temp = list1;
-                list1 = list1.next;
-        }
-        
-        while(list2 != null){
-               temp.next = list2;
-                temp = list2;
-                list2 = list2.next;
+        if(list1==null){
+            temp.next = list2;
+        }else if(list2 == null){
+            temp.next = list1;
         }
         
         return dummy.next;
