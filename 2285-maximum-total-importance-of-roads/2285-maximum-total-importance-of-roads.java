@@ -14,14 +14,14 @@ class Solution {
     //     return ans;
     // }
        public long maximumImportance(int n, int[][] roads) {
-        long degree[] = new long[n];
+        int degree[] = new int[n];
         for(int road[] : roads){
             degree[road[0]]++; 
 			degree[road[1]]++;
         }
         Arrays.sort(degree);
         long ans = 0, x = 1;
-        for(long i : degree) ans +=  i * (x++) ;
+        for(int i : degree) ans +=  i * (x++) ;
         return ans;
     }
 }
