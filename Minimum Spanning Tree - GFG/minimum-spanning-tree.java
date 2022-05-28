@@ -54,7 +54,7 @@ class Solution
     {
         //[[[1,5],[2,1]],[[0,5],[2,3]],[[1,3],[0,1]]];
         PriorityQueue<Pair> q = new PriorityQueue<>();
-        q.add(new Pair(0,0));
+        q.add(new Pair(1,0));
         int sum = 0;
         boolean[] vis = new boolean[V];
         while(q.size()!=0){
@@ -67,7 +67,6 @@ class Solution
                         Pair in = new Pair(al.get(0),al.get(1));
                         q.add(in);
                     }
-                   
                 }
                 vis[out.v] = true;
             }
