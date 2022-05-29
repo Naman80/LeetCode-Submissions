@@ -52,57 +52,49 @@ class Solution
     //Function to find sum of weights of edges of the Minimum Spanning Tree.
     static int spanningTree(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) 
     {
-        //[[[1,5],[2,1]],[[0,5],[2,3]],[[1,3],[0,1]]];
-        PriorityQueue<Pair> q = new PriorityQueue<>();
-        q.add(new Pair(0,0));
-        int sum = 0;
+        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        
         boolean[] vis = new boolean[V];
-        int[] key = new int[V];
-        int[] parent = new int[V];
-        Arrays.fill(key,Integer.MAX_VALUE);
-        key[0] = 0;
-        parent[0] = -1;
-        while(q.size()!=0){
-            Pair out = q.poll();
+        
+        pq.add(new Pair(0,0));
+        int ans = 0;
+        while(!pq.isEmpty()){
+            
+            Pair out = pq.poll();
             if(!vis[out.v]){
-                sum+= out.w;
-                ArrayList<ArrayList<Integer>> neighbours = adj.get(out.v);
-                for(ArrayList<Integer> al : neighbours){
-                    // System.out.println(al);
-                    int vert = al.get(0);
-                    int wght = al.get(1);
-                    if(!vis[vert]){
-                        // System.out.println(vert +  "  " + wght);
-                        Pair in = new Pair(vert,wght);
-                        if(key[vert] > wght){
-                            parent[vert] = out.v;
-                            key[vert] = wght;
-                            q.add(in);
-                        }
-                       
+                 vis[out.v] = true;
+            ans+= out.w;
+            // System.out.println(adj.get(out.v));
+            ArrayList<ArrayList<Integer>> x  = adj.get(out.v);
+           
+                for(ArrayList<Integer> y : x){
+                    if(!vis[y.get(0)]){
+                        pq.add(new Pair(y.get(0) , y.get(1)));
                     }
                 }
-                vis[out.v] = true;
+            
             }
+           
             
         }
         
-        return sum;
+        return ans;
+        
     }
 }
 
 class Pair implements Comparable<Pair>{
     
     
-    int v;int w;
+    int v;
+    int w;
     
-    Pair(int v , int w){
+    Pair(int v,int w){
         this.v = v;
         this.w = w;
     }
     
-    // @overide
-    public int compareTo(Pair o){
+  public int compareTo(Pair o){
         return this.w - o.w;
     }
     
