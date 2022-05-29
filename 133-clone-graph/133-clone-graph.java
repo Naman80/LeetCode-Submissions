@@ -23,34 +23,22 @@ class Solution {
         if(node == null)return null;
         Node start = new Node(node.val);
         Queue<Node> q = new LinkedList<>();
-        Queue<Node> sq = new LinkedList<>();
-        sq.add(start);
         q.add(node);
         HashMap<Integer,Node> hm = new HashMap<>();
-        // hs.add(node.val);
-        while(!q.isEmpty()){
-            
+        hm.put(1 , start);
+        while(!q.isEmpty()){ 
             Node out = q.poll();
-            Node outsq = sq.poll();
-            hm.put(out.val , outsq);
             for(Node x : out.neighbors){
                 if(!hm.containsKey(x.val)){
                     Node temp = new Node(x.val);
-                    outsq.neighbors.add(temp);
+                    hm.get(out.val).neighbors.add(temp);
                     hm.put(x.val , temp);
                     q.add(x);
-                    sq.add(temp);
                 }else{
-                    outsq.neighbors.add(hm.get(x.val));
+                    hm.get(out.val).neighbors.add(hm.get(x.val));
                 }
-                // System.out.print(temp.val + " ");
-               
             }
-            
         }
-        // System.out.println(hm);
-        // System.out.print(start);
-        
         return start;
     }
 }
