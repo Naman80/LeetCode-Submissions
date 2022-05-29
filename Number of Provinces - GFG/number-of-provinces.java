@@ -31,44 +31,51 @@ class GFG {
 //User function Template for Java
 
 class Solution {
+    
+    static int[] parent;
     static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
+    
+        parent = new int[V];
         
-        ArrayList<ArrayList<Integer>> adj1 = new ArrayList<>();
-        int n = adj.size();
-        
-        for(int i = 0 ;i < n; i++){
-            adj1.add(new ArrayList<Integer>());
+        for(int i = 0 ;i<V;i++){
+            parent[i] = i;
         }
         
-        for(int i = 0 ; i <n;i++){
-            for(int j = 0;j<n;j++){
-                if(i!=j && adj.get(i).get(j) == 1){
-                    adj1.get(i).add(j);
+        for(int i = 0;i<V;i++){
+            for(int j = 0 ; j<V;j++){
+                
+                if(i!=j && adj.get(i).get(j)==1){
+                    union(i,j);
                 }
+                
             }
         }
         
-        boolean[] vis  = new boolean[V];
         int com = 0;
-        for(int i = 0 ; i<V;i++){
-            if(!vis[i]){
-                com++;
-                dfs(i,adj1,vis);
-            }
-        }
         
+        for(int i=0;i<V;i++){
+            if(parent[i]==i)com++;
+        }
         return com;
-        
+               
     }
     
+    static int findPar(int x){
+        if(parent[x] == x) return x;
+        return parent[x] = findPar(parent[x]);
+    }
     
-   static void dfs(int v ,  ArrayList<ArrayList<Integer>> adj ,boolean[] vis){
-        vis[v] = true;
+    static void union(int u , int v){
         
-        for(int x : adj.get(v)){
-            if(!vis[x]){
-                dfs(x,adj,vis);
-            }
+        int up = findPar(u);
+        int vp = findPar(v);
+        
+        if(up != vp){
+            parent[vp] = up;
         }
+        
     }
-};
+    
+    
+    
+}
