@@ -55,7 +55,11 @@ class Solution
         PriorityQueue<Pair> pq = new PriorityQueue<>();
         
         boolean[] vis = new boolean[V];
-        
+        int[] minWeight = new int[V];
+        int[] parent  = new int[V];
+        Arrays.fill(minWeight , Integer.MAX_VALUE);
+        parent[0] = -1;
+        minWeight[0] = 0;
         pq.add(new Pair(0,0));
         int ans = 0;
         while(!pq.isEmpty()){
@@ -68,7 +72,9 @@ class Solution
             ArrayList<ArrayList<Integer>> x  = adj.get(out.v);
            
                 for(ArrayList<Integer> y : x){
-                    if(!vis[y.get(0)]){
+                    if(!vis[y.get(0)] && minWeight[y.get(0)] > y.get(1)){
+                        parent[y.get(0)] = out.v;
+                        minWeight[y.get(0)] = y.get(1);
                         pq.add(new Pair(y.get(0) , y.get(1)));
                     }
                 }
