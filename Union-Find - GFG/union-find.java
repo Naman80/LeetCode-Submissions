@@ -73,12 +73,9 @@ class Solution
     //Function to merge two nodes a and b.
     public void union_(int a, int b, int par[], int rank[])
     {
-     
       a = find(a,par);
       b = find(b,par);
-     
      if(a!=b){
-         
          if(rank[a] < rank[b]){
              par[a] = b;
          }else if(rank[b] < rank[a]){
@@ -87,15 +84,16 @@ class Solution
              par[b] = a;
              rank[a]++;
          }
-         
      }
-        
     }
 
     //Function to check whether 2 nodes are connected or not.
     public Boolean isConnected(int a, int b, int par[], int rank[])
     {
-        if(find(a,par)==find(b,par)) return true;else return false;
+        // if(find(a,par)==find(b,par)) return true;else return false;
+        int ap = find(a,par);
+        int bp = find(b,par);
+        if(par[a] == par[b]) return true;else return false;
     }
 
 }
