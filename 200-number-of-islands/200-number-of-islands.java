@@ -8,7 +8,7 @@ class Solution {
                 
                 if(grid[i][j] == '1'){
                     com++;
-                    bfs(i,j,grid);
+                    dfs(i,j,grid);
                 }
                 
             }
@@ -19,37 +19,50 @@ class Solution {
     }
     
     
-    void bfs(int i,int j , char[][]grid){
+    // void bfs(int i,int j , char[][]grid){
+    //     int r = grid.length;
+    //     int c = grid[0].length;
+    //     Queue<int[]> q = new LinkedList<>();
+    //     grid[i][j] = '0';
+    //     q.add(new int[]{i,j});
+    //     while(!q.isEmpty()){
+    //         int[] o = q.poll();
+    //         i = o[0];
+    //         j = o[1];
+    //         if(i+1<r && grid[i+1][j]=='1'){
+    //             grid[i+1][j] = '0';
+    //             q.add(new int[]{i+1,j});
+    //         }
+    //         if(j+1 < c && grid[i][j+1] == '1'){
+    //             grid[i][j+1] = '0';
+    //             q.add(new int[]{i,j+1});
+    //         }
+    //        if(i-1>=0 && grid[i-1][j]=='1'){
+    //             grid[i-1][j] = '0';
+    //             q.add(new int[]{i-1,j});
+    //         }
+    //          if(j-1 >=0 && grid[i][j-1] == '1'){
+    //             grid[i][j-1] = '0';
+    //             q.add(new int[]{i,j-1});
+    //         }
+    //     }
+    // }
+    
+    void dfs(int i,int j,char[][] grid){
         int r = grid.length;
         int c = grid[0].length;
-        Queue<int[]> q = new LinkedList<>();
         grid[i][j] = '0';
-        q.add(new int[]{i,j});
-        while(!q.isEmpty()){
-            int[] o = q.poll();
-            i = o[0];
-            j = o[1];
-            if(i+1<r && grid[i+1][j]=='1'){
-                grid[i+1][j] = '0';
-                q.add(new int[]{i+1,j});
-            }
-            
-            if(j+1 < c && grid[i][j+1] == '1'){
-                grid[i][j+1] = '0';
-                q.add(new int[]{i,j+1});
-            }
-            
-           if(i-1>=0 && grid[i-1][j]=='1'){
-                grid[i-1][j] = '0';
-                q.add(new int[]{i-1,j});
-            }
-            
-             if(j-1 >=0 && grid[i][j-1] == '1'){
-                grid[i][j-1] = '0';
-                q.add(new int[]{i,j-1});
-            }
+         if(i+1<r && grid[i+1][j]=='1'){
+             dfs(i+1,j,grid);
+         }
+         if(j+1 < c && grid[i][j+1] == '1'){
+             dfs(i,j+1,grid);
+         }
+        if(i-1>=0 && grid[i-1][j]=='1'){
+            dfs(i-1,j,grid);
         }
-        
-        
+          if(j-1 >=0 && grid[i][j-1] == '1'){
+              dfs(i,j-1,grid);
+          }
     }
 }
