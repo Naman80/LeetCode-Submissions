@@ -13,10 +13,8 @@ class Solution {
 
         if (row>=n){
             List<String> ol = new ArrayList<>();
-
             for (String[] x : board){
                 StringBuilder s = new StringBuilder();
-
                 for (int i = 0; i < x.length; i++) {
                     s.append(x[i]);
                 }
