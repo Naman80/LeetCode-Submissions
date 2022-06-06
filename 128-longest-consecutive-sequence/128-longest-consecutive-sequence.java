@@ -1,22 +1,39 @@
 class Solution {
     public int longestConsecutive(int[] nums) {
-        if(nums.length == 0 )return 0;
-        Arrays.sort(nums);
+        //O(nlogn) solution
         
-        int ans = 0;
+        // if(nums.length == 0 )return 0;
+        // Arrays.sort(nums);
+        // int ans = 0;
+        // int temp = 1;
+        // for(int i = 1 ; i < nums.length;i++){
+        //     if(nums[i] == nums[i-1])continue;
+        //     if(nums[i-1] +1 == nums[i]){
+        //         temp++;
+        //     }else{
+        //         ans = Math.max(ans,temp);
+        //         temp = 1;
+        //     }
+        // }
+        // ans = Math.max(ans,temp);
+        // return ans;
         
-        int temp = 1;
+        // O(n) solution + O(n) Space solution
         
-        for(int i = 1 ; i < nums.length;i++){
-            if(nums[i] == nums[i-1])continue;
-            if(nums[i-1] +1 == nums[i]){
-                temp++;
-            }else{
-                ans = Math.max(ans,temp);
-                temp = 1;
-            }
+        HashSet<Integer> hs = new HashSet<>();
+        for(int x:nums)hs.add(x);
+        int max = 0;
+        for(int x : nums){
+            if(!hs.contains(x-1)){
+                int currele = x;
+                int curmax = 1;
+                while(hs.contains(currele+1)){
+                    currele++;
+                    curmax++;
+                }
+                max = Math.max(max,curmax);   
+            }   
         }
-        ans = Math.max(ans,temp);
-        return ans;
+        return max;
     }
 }
