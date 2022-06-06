@@ -28,8 +28,8 @@ class Solution {
                 int currele = x;
                 int curmax = 1;
                 while(hs.contains(currele+1)){
-                    currele++;
-                    curmax++;
+                    currele+=1;
+                    curmax+=1;
                 }
                 max = Math.max(max,curmax);   
             }   
