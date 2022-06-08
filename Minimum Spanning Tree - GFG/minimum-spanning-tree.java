@@ -49,59 +49,55 @@ class DriverClass
 
 class Solution
 {
+    static int[] parent;
     //Function to find sum of weights of edges of the Minimum Spanning Tree.
     static int spanningTree(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) 
     {
-        PriorityQueue<Pair> pq = new PriorityQueue<>();
+        parent = new int[V];
         
-        boolean[] vis = new boolean[V];
-        int[] minWeight = new int[V];
-        int[] parent  = new int[V];
-        Arrays.fill(minWeight , Integer.MAX_VALUE);
-        parent[0] = -1;
-        minWeight[0] = 0;
-        pq.add(new Pair(0,0));
-        int ans = 0;
-        while(!pq.isEmpty()){
-            
-            Pair out = pq.poll();
-            if(!vis[out.v]){
-                 vis[out.v] = true;
-            ans+= out.w;
-            // System.out.println(adj.get(out.v));
-            ArrayList<ArrayList<Integer>> x  = adj.get(out.v);
-           
-                for(ArrayList<Integer> y : x){
-                    if(!vis[y.get(0)] && minWeight[y.get(0)] > y.get(1)){
-                        parent[y.get(0)] = out.v;
-                        minWeight[y.get(0)] = y.get(1);
-                        pq.add(new Pair(y.get(0) , y.get(1)));
-                    }
-                }
-            
+        for(int i =0;i<V;i++){
+            parent[i] = i;
+        }
+        
+        ArrayList<ArrayList<Integer>> newadj = new ArrayList<>();
+        
+        
+        for(int i = 0;i<adj.size();i++){
+            for(ArrayList<Integer> y : adj.get(i)){
+                y.add(0,i);
+                newadj.add(y);
             }
-           
+        }
+        // System.out.println(newadj);
+        Collections.sort(newadj , (a,b) -> a.get(2) - b.get(2));
+        int ans=0;
+        for(ArrayList<Integer> x : newadj){
+            
+            if(findpar(x.get(0)) != findpar(x.get(1))){
+                ans += x.get(2);
+                union(x.get(0) , x.get(1));
+            }
             
         }
+        
+        
         
         return ans;
         
     }
-}
-
-class Pair implements Comparable<Pair>{
     
-    
-    int v;
-    int w;
-    
-    Pair(int v,int w){
-        this.v = v;
-        this.w = w;
+    static int findpar(int x){
+        if(parent[x]==x)return x;
+        
+        return parent[x] = findpar(parent[x]);
     }
     
-  public int compareTo(Pair o){
-        return this.w - o.w;
+    static void union(int u , int v){
+        
+        u = findpar(u);
+        v = findpar(v);
+        
+        parent[v] = u;
+        
     }
-    
 }
