@@ -90,10 +90,10 @@ class Solution
     //Function to check whether 2 nodes are connected or not.
     public Boolean isConnected(int a, int b, int par[], int rank[])
     {
-        // if(find(a,par)==find(b,par)) return true;else return false;
-        int ap = find(a,par);
-        int bp = find(b,par);
-        if(par[a] == par[b]) return true;else return false;
+        if(find(a,par)==find(b,par)) return true;else return false;
+        // int ap = find(a,par);
+        // int bp = find(b,par);
+        // if(par[a] == par[b]) return true;else return false;
     }
 
 }
