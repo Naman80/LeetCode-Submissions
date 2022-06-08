@@ -50,25 +50,22 @@ class DriverClass
 class Solution
 {
     static int[] parent;
+    static int[] rank;
     //Function to find sum of weights of edges of the Minimum Spanning Tree.
     static int spanningTree(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj) 
     {
         parent = new int[V];
-        
+        rank = new int[V];
         for(int i =0;i<V;i++){
             parent[i] = i;
         }
-        
         ArrayList<ArrayList<Integer>> newadj = new ArrayList<>();
-        
-        
         for(int i = 0;i<adj.size();i++){
             for(ArrayList<Integer> y : adj.get(i)){
                 y.add(0,i);
                 newadj.add(y);
             }
         }
-        // System.out.println(newadj);
         Collections.sort(newadj , (a,b) -> a.get(2) - b.get(2));
         int ans=0;
         for(ArrayList<Integer> x : newadj){
@@ -79,25 +76,25 @@ class Solution
             }
             
         }
-        
-        
-        
         return ans;
-        
     }
-    
     static int findpar(int x){
         if(parent[x]==x)return x;
         
         return parent[x] = findpar(parent[x]);
     }
-    
     static void union(int u , int v){
-        
         u = findpar(u);
         v = findpar(v);
         
-        parent[v] = u;
+        if(rank[u] < rank[v]){
+            parent[u] = v;
+        }else if(rank[v] < rank[u]){
+            parent[v] = u;
+        }else{
+            parent[v] = u;
+            rank[u]++;
+        }
         
     }
 }
