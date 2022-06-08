@@ -1,43 +1,46 @@
 class Solution {
-    
     int[] parent;
-    
-    public int findCircleNum(int[][] adj) {
-        int n = adj.length;
-        parent = new int[n];
+    public int findCircleNum(int[][] isConnected) {
         
-        for(int i =0;i<n;i++){
+        int n = isConnected.length;
+        
+         parent = new int[n];
+        for(int i = 1 ;i< n ;i++){
             parent[i] = i;
         }
-        
-        for(int i = 0;i<n;i++){
-            for(int j = 0 ; j<n;j++){
-                if(i!=j && adj[i][j] == 1){
+        for(int i = 0 ; i < n ; i++){
+            for(int  j = 0 ; j < n;j++){
+                if(i==j)continue;
+                if(isConnected[i][j] == 1){
                     union(i,j);
                 }
             }
         }
         
-        int com = 0;
-        for(int i = 0;i<n;i++){
-            if(parent[i] == i)com++;
+        int ans = 0;
+        
+        for(int i = 0 ; i < n;i++){
+            if(parent[i]==i)ans++;
         }
-        return com;
+        
+        return ans;
+        
     }
     
-    int findPar(int x){
+    
+    int findpar(int x){
         if(parent[x]==x)return x;
-        return parent[x] = findPar(parent[x]);
+        
+        return parent[x] = findpar(parent[x]);
     }
     
     void union(int u , int v){
         
-        int up = findPar(u);
-        int vp = findPar(v);
+        int up = findpar(u);
+        int vp = findpar(v);
         
-        if(vp!=up){
-            parent[vp] = up;
+        if(up!=vp){
+            parent[up] = vp;
         }
-        
     }
 }
