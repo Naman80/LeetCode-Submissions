@@ -31,51 +31,54 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-    
     static int[] parent;
+    static int[] rank;
     static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
-    
         parent = new int[V];
-        
         for(int i = 0 ;i<V;i++){
             parent[i] = i;
         }
+        rank = new int[V];
         
         for(int i = 0;i<V;i++){
-            for(int j = 0 ; j<V;j++){
-                
-                if(i!=j && adj.get(i).get(j)==1){
+            for(int j = 0 ; j < V;j++){
+                if(adj.get(i).get(j)==1){
                     union(i,j);
                 }
-                
             }
         }
-        
-        int com = 0;
-        
-        for(int i=0;i<V;i++){
-            if(parent[i]==i)com++;
+        int ans= 0;
+        for(int i = 0 ; i < V;i++){
+            if(parent[i] == i)ans++;
         }
-        return com;
-               
+        
+        return ans;
+        
+        
     }
     
     static int findPar(int x){
         if(parent[x] == x) return x;
+        
+        
         return parent[x] = findPar(parent[x]);
     }
     
+    
     static void union(int u , int v){
         
-        int up = findPar(u);
-        int vp = findPar(v);
+        u = findPar(u);
+        v = findPar(v);
         
-        if(up != vp){
-            parent[vp] = up;
+        if(rank[v] < rank[u]){
+            parent[v] = u;
+        }else if(rank[u] < rank[v]){
+            parent[u] = v;
+        }else{
+            parent[u] = v;
+            rank[v]++;
         }
         
     }
     
-    
-    
-}
+};
