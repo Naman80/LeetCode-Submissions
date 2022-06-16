@@ -40,7 +40,7 @@ class Solution {
             }    
         }
         int emax = e - s - 1;
-        if(emax>max){
+        if(emax>=max){
              ret = str.substring(s+1 , e);
         }
         return ret;
