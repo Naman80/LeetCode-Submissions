@@ -1,7 +1,9 @@
 class Solution {
     int[] parent;
+    int[] rank;
     public boolean validPath(int n, int[][] e, int s, int d) {
         parent = new int[n];
+        rank = new int[n];
         for(int i = 0 ;i<n;i++){
             parent[i] = i;
         }
@@ -23,7 +25,18 @@ class Solution {
     void union(int u,int v){
         u = findPar(u);
         v = findPar(v);
-        parent[u] = v;
+        if(u!=v){
+            
+            if(rank[u] > rank[v]){
+                parent[v] = u;
+            }else if(rank[v] > rank[u]){
+                parent[u] = v;
+            }else{
+                parent[u] = v;
+                rank[v]++;
+            }
+            
+        }
     }
     
     
