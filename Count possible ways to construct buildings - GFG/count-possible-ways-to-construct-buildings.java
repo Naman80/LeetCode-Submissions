@@ -37,11 +37,6 @@ class Solution
             inc = ninc%mod;
             exc = nexc%mod;
         }
-        // int temp = exc;
-        // for(int i = 1 ; i < temp;i++){
-        //     exc = (exc + temp)%mod;
-        // }
-  
-        return (int)((exc*exc)%1000000007);
+        return (int)((exc*exc)%mod);
     }
 }
