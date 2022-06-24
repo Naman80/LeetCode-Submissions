@@ -8,7 +8,7 @@ class Solution {
             sum+=x;
         }
         if(sum%k!=0)return false;
-        Arrays.sort(nums);
+        // Arrays.sort(nums);
         int n = nums.length;
         // for(int i = 0 ; i <= n/2;i++){
         //     int temp = nums[i];
