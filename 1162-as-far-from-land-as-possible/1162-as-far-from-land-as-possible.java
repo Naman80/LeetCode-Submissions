@@ -1,10 +1,7 @@
 class Solution {
     public int maxDistance(int[][] grid) {
-           int n  = grid.length;
-
+        int n  = grid.length;
         int count = 1;
-
-
         while(true){
             boolean check = true;
             for (int i = 0; i < n; i++) {
@@ -34,8 +31,6 @@ class Solution {
         if(count-1==0)return -1;
         return count-1;
 
-        
-        
 //         int n  = grid.length;
 //         int max = Integer.MIN_VALUE;
 //         boolean[][] vis = new boolean[n][n];
