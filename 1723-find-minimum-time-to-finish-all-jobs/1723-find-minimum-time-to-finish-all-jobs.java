@@ -1,25 +1,29 @@
 class Solution {
-    
+    int min = Integer.MAX_VALUE;
     public int minimumTimeRequired(int[] jobs, int k) {
         int[] persons = new int[k];    
-        return solve(0,k,jobs,persons);  
+        solve(jobs.length-1,k,jobs,persons);  
+        return min;
     }
-   int solve(int start,int k,int[] jobs,int[] persons){
-        if(start>=jobs.length){
-            int max = Integer.MIN_VALUE;
-            for(int i = 0 ; i < k;i++){
-                max = Math.max(max,persons[i]);
-            }
-            return max;
+   void solve(int start,int k,int[] jobs,int[] persons){
+        int max = getMax(persons);
+        // if(max>=min)return;
+        if(start<0){
+            min = Math.min(min,max);
+            return;
         }
-        int ans = Integer.MAX_VALUE;
         for(int i = 0 ; i < k ; i++){
             if(i>0 && persons[i-1]==persons[i])continue;
             persons[i]+= jobs[start];
-            int temp = solve(start+1,k,jobs,persons);
-            persons[i]-= jobs[start];
-            ans = Math.min(temp,ans);
+            solve(start-1,k,jobs,persons);
+            persons[i]-= jobs[start];   
         }
-        return ans;
+    }
+    int getMax(int[] persons){   
+        int max = Integer.MIN_VALUE;
+        for(int x : persons){
+            max = Math.max(max,x);
+        }
+        return max;
     }
 }
