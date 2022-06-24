@@ -1,60 +1,60 @@
 class Solution {
     public boolean canPartition(int[] arr) {
-        int n = arr.length;
-        int totSum=0;
+//         int n = arr.length;
+//         int totSum=0;
     
-    for(int i=0; i<n;i++){
-        totSum+= arr[i];
-    }
+//     for(int i=0; i<n;i++){
+//         totSum+= arr[i];
+//     }
     
-    if (totSum%2==1) return false;
+//     if (totSum%2==1) return false;
     
-    else{
-        int k = totSum/2;
-        int dp[][]=new int[n][k+1];
-        for(int row[]: dp)
-        Arrays.fill(row,-1);
-        return subsetSumUtil(n-1,k,arr,dp);
-    } 
-        // int k  = 2;
-        //  int sum = 0;
-        // for(int x:nums){
-        //     sum+=x;
-        // }
-        // if(sum%k!=0)return false;
+//     else{
+//         int k = totSum/2;
+//         int dp[][]=new int[n][k+1];
+//         for(int row[]: dp)
+//         Arrays.fill(row,-1);
+//         return subsetSumUtil(n-1,k,arr,dp);
+//     } 
+       
+         int sum = 0;
+        for(int x:arr){
+            sum+=x;
+        }
+        if(sum%2!=0)return false;
         // int[] arr = new int[2];
-        // boolean[][] dp = new boolean[nums.length+1][(sum/k)+1];
-        // return solve(0,nums,0,sum/k,dp);
+        Boolean[][] dp = new Boolean[arr.length+1][(sum/2)+1];
+        return solve(0,arr,0,sum/2,dp);
     }
     
-    static boolean subsetSumUtil(int ind, int target,int arr[],int[][] dp){
-    if(target==0)
-        return true;
+//     static boolean subsetSumUtil(int ind, int target,int arr[],int[][] dp){
+//     if(target==0)
+//         return true;
     
-    if(ind == 0)
-        return arr[0] == target;
+//     if(ind == 0)
+//         return arr[0] == target;
     
-    if(dp[ind][target]!=-1)
-        return dp[ind][target]==0?false:true;
+//     if(dp[ind][target]!=-1)
+//         return dp[ind][target]==0?false:true;
         
-    boolean notTaken = subsetSumUtil(ind-1,target,arr,dp);
+//     boolean notTaken = subsetSumUtil(ind-1,target,arr,dp);
     
-    boolean taken = false;
-    if(arr[ind]<=target)
-        taken = subsetSumUtil(ind-1,target-arr[ind],arr,dp);
-        dp[ind][target]=notTaken||taken?1:0;
-    return notTaken||taken;
-}
-    // boolean solve(int idx,int[] nums,int csum,int sum,boolean[][] dp){
-    //     if(csum>sum)return false;
-    //     if(csum==sum)return true;
-    //     if(idx>=nums.length)return false;
-    //     // if(dp[idx][csum])return dp[idx][csum];
-    //     if(solve(idx+1,nums,csum+nums[idx],sum,dp))return true;
-    //    if(solve(idx+1,nums,csum,sum,dp))return true;
-    //     return false;
-    //     // return dp[idx][csum] = opt1||opt2;
-    // }
+//     boolean taken = false;
+//     if(arr[ind]<=target)
+//         taken = subsetSumUtil(ind-1,target-arr[ind],arr,dp);
+//         dp[ind][target]=notTaken||taken?1:0;
+//     return notTaken||taken;
+// }
+    boolean solve(int idx,int[] nums,int csum,int sum,Boolean[][] dp){
+        if(csum>sum)return false;
+        if(csum==sum)return true;
+        if(idx>=nums.length)return false;
+        if(dp[idx][csum]!=null)return dp[idx][csum];
+        boolean opt1 = solve(idx+1,nums,csum,sum,dp);
+        boolean opt2 = solve(idx+1,nums,csum+nums[idx],sum,dp);
+        // return false;
+        return dp[idx][csum] = opt1||opt2;
+    }
     
 //     boolean solve(int start,int[] arr,int[] nums,int k){
 //         if(start>= nums.length){
