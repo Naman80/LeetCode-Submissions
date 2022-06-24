@@ -19,24 +19,30 @@ class Solution {
    //          persons[i]-= jobs[start];   
    //      }
    //  }
-   //  int getMax(int[] persons){   
-   //      int max = Integer.MIN_VALUE;
-   //      for(int x : persons){
-   //          max = Math.max(max,x);
-   //      }
-   //      return max;
-   //  }
+    int getMax(int[] persons){   
+        int max = Integer.MIN_VALUE;
+        for(int x : persons){
+            max = Math.max(max,x);
+        }
+        return max;
+    }
     
     public void solve(int idx , int[] cook , int[] arr , int k){
+        // if(idx>=cook.length){
+        //     int max = Integer.MIN_VALUE;
+        //     for(int i = 0 ; i<k;i++){
+        //         if(arr[i]==0)return;
+        //         max = Math.max(max,arr[i]);
+        //     }
+        //     ans= Math.min(ans,max);
+        //     return;
+        // }   
+        int max = getMax(arr);
+        if(max>=ans)return;
         if(idx>=cook.length){
-            int max = Integer.MIN_VALUE;
-            for(int i = 0 ; i<k;i++){
-                if(arr[i]==0)return;
-                max = Math.max(max,arr[i]);
-            }
-            ans= Math.min(ans,max);
+            ans = Math.min(ans,max);
             return;
-        }   
+        }
         for(int i =0;i<k;i++){
             if(i>0 && arr[i-1]==0)break;
             arr[i]+=cook[idx];
