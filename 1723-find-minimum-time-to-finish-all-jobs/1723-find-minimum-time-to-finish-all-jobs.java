@@ -14,7 +14,7 @@ class Solution {
         }
         int ans = Integer.MAX_VALUE;
         for(int i = 0 ; i < k ; i++){
-            if(i>0 && persons[i-1]==0)break;
+            if(i>0 && persons[i-1]==persons[i])continue;
             persons[i]+= jobs[start];
             int temp = solve(start+1,k,jobs,persons);
             persons[i]-= jobs[start];
