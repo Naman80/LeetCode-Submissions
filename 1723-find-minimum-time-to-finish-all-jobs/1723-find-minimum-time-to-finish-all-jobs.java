@@ -7,7 +7,7 @@ class Solution {
     }
    void solve(int start,int k,int[] jobs,int[] persons){
         int max = getMax(persons);
-        if(max>=min)return;
+        // if(max>=min)return;
         if(start<0){
             min = Math.min(min,max);
             return;
