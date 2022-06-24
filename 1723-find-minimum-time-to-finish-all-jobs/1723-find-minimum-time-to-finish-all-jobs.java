@@ -7,13 +7,13 @@ class Solution {
     }
    void solve(int start,int k,int[] jobs,int[] persons){
         int max = getMax(persons);
-        // if(max>=min)return;
+        if(max>=min)return;
         if(start<0){
             min = Math.min(min,max);
             return;
         }
         for(int i = 0 ; i < k ; i++){
-            if(i>0 && persons[i-1]==persons[i])continue;
+            if(i>0 && persons[i-1]==0)break;
             persons[i]+= jobs[start];
             solve(start-1,k,jobs,persons);
             persons[i]-= jobs[start];   
