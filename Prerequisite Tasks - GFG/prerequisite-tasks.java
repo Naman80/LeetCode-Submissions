@@ -40,31 +40,48 @@ class GFG {
 //User function Template for Java
 
 class Solution {
+    int[] parent;
     public boolean isPossible(int n, int[][] pre)
     {
         
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        parent = new int[n];
         
         for(int i = 0 ; i < n;i++){
-            adj.add(new ArrayList<>());
+            parent[i] = i;
         }
         
-        int nlen = pre.length;
-        
-        for(int i = 0 ; i<nlen;i++){
-            adj.get(pre[i][1]).add(pre[i][0]);
-        }
-        
-        boolean[] vis = new boolean[n];
-        boolean[] rec = new boolean[n];
-        
-        for(int i = 0;i<n;i++){
-            if(!vis[i]){
-                if(dfs(i,adj,vis,rec))return false;
-            }
+        for(int[] arr:pre){
+            
+            if(find(arr[0])==find(arr[1]))return false;
+            
+            union(arr[0],arr[1]);
+            
         }
         
         return true;
+        
+        // ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        
+        // for(int i = 0 ; i < n;i++){
+        //     adj.add(new ArrayList<>());
+        // }
+        
+        // int nlen = pre.length;
+        
+        // for(int i = 0 ; i<nlen;i++){
+        //     adj.get(pre[i][1]).add(pre[i][0]);
+        // }
+        
+        // boolean[] vis = new boolean[n];
+        // boolean[] rec = new boolean[n];
+        
+        // for(int i = 0;i<n;i++){
+        //     if(!vis[i]){
+        //         if(dfs(i,adj,vis,rec))return false;
+        //     }
+        // }
+        
+        // return true;
     }
     
     
@@ -83,6 +100,22 @@ class Solution {
         rec[v] = false;
         
         return false;
+    }
+    
+    int find(int x){
+        if(parent[x] == x)return x;
+        
+        return parent[x] = find(parent[x]);
+    }
+    
+    
+    void union(int u,int v){
+        
+        // u = find(u);
+        v = find(v);
+        
+        parent[u] = v;
+        
     }
     
 }
