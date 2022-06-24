@@ -18,17 +18,12 @@ class Solution {
             }
             ans= Math.min(ans,max);
             return;
-        }
-        
-        
+        }   
         for(int i =0;i<k;i++){
+            if(i>0 && arr[i-1]==0)break;
             arr[i]+=cook[idx];
             solve(idx+1,cook,arr,k);
             arr[i]-=cook[idx];
         }
-        
     }
-    
-    
-    
 }
