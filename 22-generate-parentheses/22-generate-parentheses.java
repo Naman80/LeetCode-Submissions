@@ -29,9 +29,20 @@ class Solution {
 //         }
         
 //         return new ArrayList<String>(num);
+        
+          List<String> ans = new ArrayList();
+        if (n == 0) {
+            ans.add("");
+        } else {
+            for (int c = 0; c < n; ++c)
+                for (String right: generateParenthesis(n-1-c))
+                    for (String left: generateParenthesis(c))
+                        ans.add("(" + left + ")" + right);
+        }
+        return ans;
 
-        List<String> al = new ArrayList<>();
-        solve(0,0,n,"",al);return al;
+        // List<String> al = new ArrayList<>();
+        // solve(0,0,n,"",al);return al;
         
     }
     
@@ -39,21 +50,12 @@ class Solution {
         if(open==n && close == n){
         al.add(s);return;
         }    
-            
-    
         if(open < n){
-            
             solve(open+1,close,n,s+"(",al);
-        
         }
-        
         if(close<open){
-        
         solve(open,close+1,n,s+")",al);
         }
-        
-    
-    
     }
     
     
