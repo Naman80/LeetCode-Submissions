@@ -16,13 +16,14 @@ class Solution {
                 adj.add(al);
             }
         }
-        
+        int usedegdes = 0;
         Collections.sort(adj,Comparator.comparingInt((a)->a.get(2)));
         int sum = 0;
         for(ArrayList<Integer> x : adj){
-            if(find(x.get(0)) != find(x.get(1))){
+            if(usedegdes < n-1 && find(x.get(0)) != find(x.get(1))){
                 sum+=x.get(2);
                 union(x.get(0),x.get(1));
+                usedegdes++;
             }
         }
         return sum;
