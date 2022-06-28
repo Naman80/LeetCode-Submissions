@@ -1,44 +1,70 @@
 class Solution {
-    public int minCostConnectPoints(int[][] points) {
-        int n = points.length;
-        
-        // Min-heap to store minimum weight edge at top.
-        PriorityQueue<Pair<Integer, Integer>> heap = new PriorityQueue<>((a, b) -> (a.getKey() - b.getKey()));;
-        
-        // Track nodes which are included in MST.
-        boolean[] inMST = new boolean[n];
-        
-        heap.add(new Pair(0, 0));
-        int mstCost = 0;
-        int edgesUsed = 0;
-        
-        while (edgesUsed < n) {
-            Pair<Integer, Integer> topElement = heap.poll();
-            
-            int weight = topElement.getKey();
-            int currNode = topElement.getValue();
-            
-            // If node was already included in MST we will discard this edge.
-            if (inMST[currNode]) {
-                continue;
-            }
-            
-            inMST[currNode] = true;
-            mstCost += weight;
-            edgesUsed++;
-            
-            for (int nextNode = 0; nextNode < n; ++nextNode) {
-                // If next node is not in MST, then edge from curr node
-                // to next node can be pushed in the priority queue.
-                if (!inMST[nextNode]) {
-                    int nextWeight = Math.abs(points[currNode][0] - points[nextNode][0]) + 
-                                     Math.abs(points[currNode][1] - points[nextNode][1]);
-        
-                    heap.add(new Pair(nextWeight, nextNode));
-                }
+    int[] parent;
+    int[] rank;
+    public int minCostConnectPoints(int[][] p) {
+        int n = p.length;
+        parent = new int[n];
+        for(int i = 0 ; i < n;i++){parent[i] = i;}
+        rank = new int[n];
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i = 0;i<n;i++){
+            for(int j = i+1;j<n;j++){
+                
+                ArrayList<Integer> al = new ArrayList<>();
+                
+                al.add(i);al.add(j);
+                int dis = Math.abs(p[i][0] - p[j][0]) + Math.abs(p[i][1] - p[j][1]);
+                al.add(dis);
+                adj.add(new ArrayList<>(al));
             }
         }
         
-        return mstCost;
+        Collections.sort(adj,Comparator.comparingInt((a)->a.get(2)));
+        
+        int sum = 0;
+        
+        for(ArrayList<Integer> x : adj){
+            
+            if(find(x.get(0)) != find(x.get(1))){
+                sum+=x.get(2);
+                union(x.get(0),x.get(1));
+            }
+            
+        }
+        
+        return sum;
+        
+        
+    
     }
+    
+    int find(int x){
+        if(parent[x] == x)return x;
+        
+        return parent[x] = find(parent[x]);
+    }
+    
+    void union(int u , int v){
+        
+        u = find(u);
+        v = find(v);
+        
+        if(u!=v){
+            
+            if(rank[u] < rank[v]){
+                parent[u] = v;
+            }else if(rank[v] < rank[u]){
+                parent[v]  = u;
+            }else{
+                parent[v] = u;
+                rank[u]++;
+            }
+            
+        }
+        
+    }
+    
+    
+    
+    
 }
