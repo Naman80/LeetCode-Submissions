@@ -121,59 +121,51 @@ class Node
 class Solution
 {
     //Function to return the lowest common ancestor in a Binary Tree.
-	Node lca(Node root, int n1,int n2)
-	{
-	    ArrayList<Node> path1 = new ArrayList<>();
-	    ArrayList<Node> path2 = new ArrayList<>();
+    Node lca(Node root, int n1,int n2){
+        
+        if(root==null)return null;
+        if(root.data==n1 || root.data==n2)return root;
+        
+        Node left = lca(root.left,n1,n2);
+        Node right = lca(root.right,n1,n2);
+        
+        
+        if(left==null)return right;
+        if(right==null)return left;
+        return root;
+    }
+// 	Node lca(Node root, int n1,int n2)
+// 	{
+// 	    ArrayList<Node> path1 = new ArrayList<>();
+// 	    ArrayList<Node> path2 = new ArrayList<>();
+// 	    rootToNodePath(root,n1,path1);
+// 	    rootToNodePath(root,n2,path2);
+// 	    Node ans  = null;
+// 	    for(int i = 0 ; i< Math.min(path1.size(),path2.size());i++){
+// 	        if(path1.get(i).data != path2.get(i).data){
+// 	            break;
+// 	        }else{
+// 	            ans = path1.get(i);
+// 	        }
+// 	    }
+// 	    return ans;
 	    
-	    solve(root,n1,path1);
-	    solve(root,n2,path2);
-	    
-	    Node ans  = null;
-	    
-	    for(int i = 0 ; i< Math.min(path1.size(),path2.size());i++){
-	        
-	        if(path1.get(i).data != path2.get(i).data){
-	            break;
-	        }else{
-	            ans = path1.get(i);
-	        }
-	        
-	    }
-	    
-	    return ans;
-		
-	}
-	
-	
-	void solve(Node root,int n,ArrayList<Node> al){
-	    
-	    
-	    if(root.data == n){
-	        al.add(root);
-	        return ;
-	    }
-	    
-	    
-	    if(al.size()==0 && root.left!= null)solve(root.left,n,al);
-	    if(al.size()!=0){
-	        
-	        al.add(0,root);
-	        return;
-	        
-	    }
-	    
-	    
-	     if(al.size()==0 && root.right!= null)solve(root.right,n,al);
-	    if(al.size()!=0){
-	        
-	        al.add(0,root);
-	        return;
-	        
-	    }
-	    
-	}
-	
-	
+// 	}
+// 	void rootToNodePath(Node root,int n,ArrayList<Node> al){
+// 	    if(root.data == n){
+// 	        al.add(root);
+// 	        return ;
+// 	    }
+// 	    if(al.size()==0 && root.left!= null)rootToNodePath(root.left,n,al);
+// 	    if(al.size()!=0){
+// 	        al.add(0,root);
+// 	        return;
+// 	    }
+// 	    if(al.size()==0 && root.right!= null)rootToNodePath(root.right,n,al);
+// 	    if(al.size()!=0){
+// 	        al.add(0,root);
+// 	        return;
+// 	    }
+// 	}
 }
 
