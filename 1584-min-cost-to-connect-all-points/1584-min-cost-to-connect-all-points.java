@@ -24,6 +24,7 @@ class Solution {
                 sum+=x.get(2);
                 union(x.get(0),x.get(1));
                 usedegdes++;
+                if(usedegdes==n-1)break;
             }
         }
         return sum;
