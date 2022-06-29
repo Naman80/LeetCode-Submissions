@@ -7,7 +7,7 @@ class Solution {
 	for (int[] p: people){
         // System.out.print(p[0] + " " + p[1] + " , ");
         ordered.add(p[1], p);
-        int[][] ans = ordered.toArray(new int[people.length][2]);
+        // int[][] ans = ordered.toArray(new int[people.length][2]);
         // System.out.println(Arrays.deepToString(ans));
     } 
 	return ordered.toArray(new int[people.length][2]);
