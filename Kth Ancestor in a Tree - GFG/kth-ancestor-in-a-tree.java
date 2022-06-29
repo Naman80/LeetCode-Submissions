@@ -127,38 +127,27 @@ class Tree
     public int kthAncestor(Node root, int k, int node)
     {
         ArrayList<Integer> path = new ArrayList<>();
-        
         rtnp(root,node,path);
-        // System.out.println(path);
         Collections.reverse(path);
         if(k>= path.size())return -1;
         return path.get(k);
-        
     }
     
     void rtnp(Node root,int node,ArrayList<Integer> path){
         
     if(root==null)return;
-    if(root.data==node){
-        path.add(node);return;
+        if(root.data==node){
+            path.add(node);return;
+        }
+    rtnp(root.left,node,path);
+        if(path.size() != 0){
+            path.add(0,root.data);
+            return ;
+        }
+    rtnp(root.right,node,path);
+        if(path.size() != 0){
+            path.add(0,root.data);
+            return;
+        }
     }
-    
-    
-    if(path.size()==0)rtnp(root.left,node,path);
-    if(path.size() != 0){
-        path.add(0,root.data);
-        return ;
-    }
-    
-    if(path.size()==0)rtnp(root.right,node,path);
-    if(path.size() != 0){
-        path.add(0,root.data);
-        return;
-    }
-    
-        
-    }
-    
-    
-    
 }
