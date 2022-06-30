@@ -38,49 +38,51 @@ class Solution
 {  int[] colour;
     public boolean isBipartite(int V, ArrayList<ArrayList<Integer>>adj)
     {
-        
         colour = new int[V];
         for(int i = 0 ; i < V;i++){
             colour[i] = -1;
         }
-        
         for(int i = 0;i<V;i++){
             if(colour[i] == -1){
-                
-                if(!dfs(i,adj))return false;
-                
+                if(!bfs(i,adj))return false;
             }
         }
-        
         return true;
-        
     }
+    // boolean dfs(int v , ArrayList<ArrayList<Integer>>adj){
+    //     if(colour[v] == -1) colour[v] = 1;
+    //     for(int x : adj.get(v)){
+    //         if(colour[x]==-1){
+    //             colour[x] = 1 - colour[v];
+    //             if(!dfs(x,adj))return false;
+    //         }else{
+    //             if(colour[v] == colour[x])return false;
+    //         }
+    //     }
+    //     return true;
+    // }
     
-    
-    
-    boolean dfs(int v , ArrayList<ArrayList<Integer>>adj){
+    boolean bfs(int v , ArrayList<ArrayList<Integer>> adj){
         
+        if(colour[v] == -1)colour[v] = 1;
         
-        if(colour[v] == -1) colour[v] = 1;
+        Queue<Integer> q = new LinkedList<>();
         
-        for(int x : adj.get(v)){
-            
-            if(colour[x]==-1){
-                
-                colour[x] = 1 - colour[v];
-                
-                if(!dfs(x,adj))return false;
-                
-            }else{
-                
-                if(colour[v] == colour[x])return false;
+        q.add(v);
+        
+        while(q.size()!=0){
+            int out = q.poll();
+            for(int x : adj.get(out)){
+                if(colour[x]==-1){
+                    colour[x] = 1 - colour[out];
+                    q.add(x);
+                }else if(colour[x]==colour[out])return false;
             }
-            
-            
-            
         }
         
+        
         return true;
+        
         
     }
 }
