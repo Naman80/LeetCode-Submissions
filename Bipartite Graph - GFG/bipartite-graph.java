@@ -64,12 +64,9 @@ class Solution
     
     boolean bfs(int v , ArrayList<ArrayList<Integer>> adj){
         
-        if(colour[v] == -1)colour[v] = 1;
-        
+        colour[v] = 1;
         Queue<Integer> q = new LinkedList<>();
-        
         q.add(v);
-        
         while(q.size()!=0){
             int out = q.poll();
             for(int x : adj.get(out)){
@@ -79,10 +76,7 @@ class Solution
                 }else if(colour[x]==colour[out])return false;
             }
         }
-        
-        
         return true;
-        
         
     }
 }
