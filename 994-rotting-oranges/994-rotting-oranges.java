@@ -36,9 +36,7 @@ class Solution {
             for(int  i = 0 ;i<4;i++){
                 int newx = x + dirx[i];
                 int newy = y + diry[i];
-                if( newx<0 || newx >=n ) continue;
-                if( newy<0 || newy >=m ) continue;
-                if(grid[newx][newy]==0) continue;
+            if( newx<0 || newx >=n || newy<0 || newy >=m) continue;
                 if( grid[newx][newy] == 1 ){
                     time[newx][newy] = time[x][y]+1;
                     grid[newx][newy] = 0;
