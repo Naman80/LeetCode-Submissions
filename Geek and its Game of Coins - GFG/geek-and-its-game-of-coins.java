@@ -36,49 +36,21 @@ class Solution
         
         for(int i = 2;i<N+1;i++){
             
-            
             if(i<X && i<Y){
-                
                 if(ywin[i-1]==0)xwin[i] = 1;
-                    
-            }else if (i>=X && i<Y){
-                
-                if(ywin[i-1] == 0 || ywin[i-X]==0)xwin[i] = 1;
-                
-            }else if(i>=Y && i < X){
-                
-                if(ywin[i-1] == 0 || ywin[i-Y]==0)xwin[i] = 1;
-                
-            }else{
-                
-                if(ywin[i-1] == 0 || ywin[i-X]==0 || ywin[i-Y] ==0 )xwin[i] = 1;
-                
-            }
-            
-            
-              
-           if(i<X && i<Y){
-                
                 if(xwin[i-1]==0)ywin[i] = 1;
-                    
             }else if (i>=X && i<Y){
-                
-                if(xwin[i-1] == 0 || xwin[i-X]==0)ywin[i] = 1;
-                
+                if(ywin[i-1] == 0 || ywin[i-X]==0)xwin[i] = 1;
+                 if(xwin[i-1] == 0 || xwin[i-X]==0)ywin[i] = 1;
             }else if(i>=Y && i < X){
-                
+                if(ywin[i-1] == 0 || ywin[i-Y]==0)xwin[i] = 1;
                 if(xwin[i-1] == 0 || xwin[i-Y]==0)ywin[i] = 1;
-                
             }else{
-                
+                if(ywin[i-1] == 0 || ywin[i-X]==0 || ywin[i-Y] ==0 )xwin[i] = 1;
                 if(xwin[i-1] == 0 || xwin[i-X]==0 || xwin[i-Y] ==0 )ywin[i] = 1;
-                
             }
             
         }
-        
-       
-       
         return xwin[N];
     }
 }
