@@ -2,11 +2,11 @@ class Solution {
 public:
     bool solve(vector<vector<char> > &mat, string target, int i, int j, int idx, int r, int c,vector<vector<bool>>&vis){
         //base case
-         if(idx==target.size()){
-            return true;
-        }
         if(i<0 || j<0 || i>=r || j>=c || mat[i][j]!=target[idx] || vis[i][j]==1){
             return false;
+        }
+         if(idx==target.size()-1){
+            return true;
         }
         vis[i][j] = 1;
         bool op1 = solve(mat,target,i+1,j,idx+1,r,c,vis)  ;
