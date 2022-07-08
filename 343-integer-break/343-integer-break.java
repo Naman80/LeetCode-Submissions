@@ -10,10 +10,7 @@ class Solution {
                 }else{
                     dp[i][j] = Math.max(Math.max(i*(j-i) , i * (dp[i][j-i])),dp[i-1][j]);
                 }
-                
-                // System.out.print(dp[i][j] + "   ");
             }
-            // System.out.println();
         }
         
         return dp[n][n];
