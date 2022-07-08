@@ -12,9 +12,7 @@ class Solution {
            hm.add(ch);
            len = Math.max(len,j-i+1);
            j++;
-
        }
-
        return len;
    }
     //     public int lengthOfLongestSubstring(String s) {
@@ -32,6 +30,6 @@ class Solution {
     //         len = Math.max(len,j-i+1);
     //         j++;
     //     }
-    //     return len;yo
+    //     return len;
     // }
 }
