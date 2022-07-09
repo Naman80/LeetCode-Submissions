@@ -28,8 +28,7 @@ class Solution {
     
     
     void perf(ArrayList<Integer> al){
-        
-        for(int i = 1 ;i <= 10000 ; i++){
+        for(int i = 1 ;i <= 100 ; i++){
             int sqr = i*i;
             if(sqr > 10000){
                 break;
