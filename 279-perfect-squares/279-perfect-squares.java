@@ -14,16 +14,11 @@ class Solution {
                 int in = al.get(j);
                 if(in <=  i){
                     min = Math.min(min,dp[i - in]);
-                }else break;
-                
+                }   
             }
-            
             dp[i] = min+1;
         }
-        
         return dp[n];
-        
-        
     }
     
     
