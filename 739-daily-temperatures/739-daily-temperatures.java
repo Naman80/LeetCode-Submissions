@@ -2,12 +2,12 @@ class Solution {
     public int[] dailyTemperatures(int[] temp) {
         
         int[] use = nge(temp);
-          int n = temp.length;
-        for(int  i = 0 ; i < n ; i++){
-            if(use[i] == 0)continue;
+//           int n = temp.length;
+//         for(int  i = 0 ; i < n ; i++){
+//             if(use[i] == 0)continue;
             
-            else use[i] = use[i]  - i;
-        }
+//             else use[i] = use[i]  - i;
+//         }
         
         return use;
         
@@ -30,7 +30,7 @@ class Solution {
                 st.pop();
             }
             if(st.size()!=0){
-                  arr[i] = st.peek();
+                  arr[i] = st.peek()-i;
             }
             
             st.push(i);
