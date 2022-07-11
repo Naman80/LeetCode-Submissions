@@ -121,12 +121,10 @@ class Solution {
             else return false;
         }
         
-        
-        boolean left = check(root.left , sum+root.data , s);
-        
+        boolean left = check(root.left , sum+root.data,s);
+        if(left)return true;
         boolean right = check(root.right,sum+root.data,s);
-        
-        
-        return left || right;
+        if(right)return true;
+        return false;
     }
 }
