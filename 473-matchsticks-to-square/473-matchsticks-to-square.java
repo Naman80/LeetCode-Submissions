@@ -23,7 +23,7 @@ class Solution {
             }
             return true;   
         }
-        if(start>= nums.length)return false;
+        // if(start>= nums.length)return false;
         for(int i = 0 ;i<k;i++){
             if(i>0 && arr[i-1]==0)break;
             arr[i]+=nums[start];
