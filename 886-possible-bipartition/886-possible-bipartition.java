@@ -26,7 +26,10 @@ class Solution {
         
         
         for(int i = 0 ; i < n;i++){
-            if(!check(i,adj,color))return false;
+            if(color[i]==-1){
+                if(!check(i,adj,color))return false;
+            }
+            
         }
         
         return true;
