@@ -9,12 +9,12 @@ class Solution {
         }
         if(sum%k!=0)return false;
         // Arrays.sort(nums);
-        int n = nums.length;
-        for(int i = 0 ; i <= n/2;i++){
-            int temp = nums[i];
-            nums[i] = nums[n-1-i];
-            nums[n-1-i] = temp;
-        }
+        // int n = nums.length;
+        // for(int i = 0 ; i <= n/2;i++){
+        //     int temp = nums[i];
+        //     nums[i] = nums[n-1-i];
+        //     nums[n-1-i] = temp;
+        // }
         int[] arr = new int[k];
         return solve(0,nums,arr,k,sum/k);
     }
@@ -25,7 +25,6 @@ class Solution {
             }
             return true;   
         }
-        if(start>= nums.length)return false;
         for(int i = 0 ;i<k;i++){
             if(i>0 && arr[i-1]==0)break;
             arr[i]+=nums[start];
@@ -36,4 +35,7 @@ class Solution {
         }
         return false;
     }
+    
+    
+    
 }
