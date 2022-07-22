@@ -2,7 +2,7 @@ class Solution {
     public int maxSatisfaction(int[] sat) {
         Arrays.sort(sat);
         int n = sat.length;
-        Integer[][] dp = new Integer[n+1][n+1];
+        Integer[][] dp = new Integer[n][n+1];
         return solve(0,1,sat,dp);   
     }
     int solve(int idx , int time , int[] sat,Integer[][] dp){
