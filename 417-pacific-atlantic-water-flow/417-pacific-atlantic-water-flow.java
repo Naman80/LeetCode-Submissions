@@ -1,3 +1,9 @@
+
+// Two Queue and add all the Pacific border to one queue; Atlantic border to another queue.
+// Keep a visited matrix for each queue. In the end, add the cell visited by two queue to the result.
+// BFS: Water flood from ocean to the cell. Since water can only flow from high/equal cell to low cell, add the neighboor cell with height larger or equal to current cell to the queue and mark as visited.
+
+
 public class Solution {
     int[][]dir = new int[][]{{1,0},{-1,0},{0,1},{0,-1}};
     public List<List<Integer>> pacificAtlantic(int[][] matrix) {
