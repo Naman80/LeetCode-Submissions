@@ -3,21 +3,23 @@ public:
     vector<int> twoSum(vector<int>& nums, int target) {
         
         int size = nums.size();
-        vector<int> ans;
+        // vector<int> ans;
+        
+        map<int,int> mapi;
         for(int i = 0 ; i < size ; i++){
-            for(int j = i+1 ; j < size ; j++){
-                int sum = nums[i] + nums[j];                
-                if(sum == target){
-                    ans.push_back(i);
-                    ans.push_back(j);
-                    return ans;
-                }
-            }
+            mapi[nums[i]] = i;
         }
-        
-        ans.push_back(-1);
-        ans.push_back(-1);
-        return ans;
-        
+        for(int i =0  ; i < size ;  i ++){
+            
+            int remain = target - nums[i];
+            
+            if(mapi.find(remain) != mapi.end()){
+                
+                if(i!= mapi[remain])return {i , mapi[remain]};
+                
+            }
+            
+        }
+        return {-1 ,-1};
     }
 };
