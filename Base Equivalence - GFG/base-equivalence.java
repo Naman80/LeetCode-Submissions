@@ -29,39 +29,22 @@ class Solution
 {
     String baseEquiv(int n, int m)
     {
-        // code here
         int i = 2;
-        
         int j = 32;
-        
         while(i<=j){
-            
             int mid = (i+j)/2;
-            
-            int temp = nearestPowerOfK(n , mid) + 1;
-            
-            if(temp == m){
-                // System.out.print(mid + " " + temp);
+            int temp = nearestPower(n , mid) + 1;
+            if(temp == m)
                 return "Yes";
-            }else if(temp > m){
+            else if(temp > m)
                 i = mid +1 ;
-            }else j = mid-1;
-            
-            
-            
+            else j = mid-1;
         }
-        
         return "No";
-        
     }
-    
-    
-    
-     int nearestPowerOfK(int N, int K)
-{
-    // Finding log of the element
-    int lg = (int)(Math.log(N) / Math.log(K));
-    return lg;
-}
-    
+    int nearestPower(int n, int mid)
+    {
+        int leftMostBit = (int)(Math.log(n) / Math.log(mid));
+        return leftMostBit;
+    }
 }
