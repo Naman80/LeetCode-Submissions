@@ -12,7 +12,7 @@ class Solution {
     int maxGroupSize(int arr[], int N, int K) {
         // code here
         
-        map<int,int> mapi;
+        unordered_map<int,int> mapi;
         // for(int i = 0 ; i < K ; i++)map.put(i , 0);
         for(int i = 0 ; i < N ; i ++){
             arr[i] = arr[i]%K;
