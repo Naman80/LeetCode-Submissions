@@ -36,16 +36,12 @@ class Solution
 {
     public int[] twoOddNum(int arr[], int n)
     {
-        // code here
-        
         int xor = 0;
         for(int  x: arr)xor^=x;
         int temp = xor;
-        int i = 0;
-        for(i = 0 ; i < 32 ;  i++){
-            if((xor & (1<<i))!=0)break;
-        }
-        for(int x : arr)if(((x>>i)&1) == 1)temp^=x;
+        int bit = 0;
+        for(int i = 0 ; i < 32 ;  i++)if((xor & (1<<i))!=0)bit = i;
+        for(int x : arr)if(((x>>bit)&1) == 1)temp^=x;
         int a = temp;
         int b = temp^xor;
         int[] ans = new int[2];
