@@ -44,14 +44,7 @@ class Solution
         for(int x : arr)if(((x>>bit)&1) == 1)temp^=x;
         int a = temp;
         int b = temp^xor;
-        int[] ans = new int[2];
-        if(a>b){
-            ans[0] = a;
-            ans[1] = b;
-        }else {
-            ans[1] = a;
-            ans[0] = b;
-        }
-        return ans;
+        return new int[]{Math.max(a,b)  , Math.min(a,b)};
+       
     }
 }
