@@ -23,42 +23,15 @@ class GFG {
 class Solution {
     
     static String isSumOfTwo(int N){
-        // code here
-        
-        
-        for(int i = 2 ; i < N ; i++){
-            
-            if(isPrime(i)){
-                
-                int rem = N - i;
-                
-                if(isPrime(rem))return "Yes";
-                
-            }
-            
-            
-            
-        }
-        
+        for(int i = 2 ; i < N ; i++)
+            if(isPrime(i) &&  isPrime(N - i))return "Yes";
         return "No";
-        
-        
-        
     }
-    
-    
-    
     static boolean isPrime(int x){
-        
         if(x==0 || x == 1)return false;
-        
         for(int i = 2 ; i * i <= x ; i++){
-            
             if(x%i==0)return false;
         }
-        
         return true;
     }
-    
-    
 }
