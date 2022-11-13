@@ -8,18 +8,13 @@ class Solution {
             while(i < n && s.charAt(i)==' '){
                 i++;
             }
-            
             while(i < n && s.charAt(i)!=' '){
                 temp+= s.charAt(i);
                 i++;
             }
-            
             if(temp!="")
-                ans= " " + temp +ans; 
-            
-            
+                ans= " " + temp +ans;    
         }
-        
-        return ans.substring(1 , ans.length());
+        return ans.substring(1);
     }
 }
