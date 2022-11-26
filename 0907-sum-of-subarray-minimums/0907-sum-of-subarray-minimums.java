@@ -7,16 +7,13 @@ class Solution {
         int[] front = nsef(arr);
         for(int i = 0 ; i < n ; i ++){
             long temp = 0;
-            temp+= (i - front[i])%mod;
-            temp+= (back[i] - i-1)%mod;
+            temp+= (i - front[i])%mod + (back[i] - i-1)%mod;;
             temp+= ((i - front[i]) - 1)*(back[i] - i-1)%mod;
-            temp%=mod;
             ans+= (temp*arr[i])%mod;
             ans%=mod;
         }
         return (int)ans;
     }
-    
     public int[] nseb(int[] arr){
         int n = arr.length;
         int[] ans = new int[n];
@@ -51,7 +48,4 @@ class Solution {
         }      
         return ans;
     }
-    
-    
-    
 }
