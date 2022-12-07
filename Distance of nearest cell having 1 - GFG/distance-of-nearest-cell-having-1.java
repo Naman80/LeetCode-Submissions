@@ -52,23 +52,17 @@ class Solution
                     q.add(new pair(i , j));
                 }
             }
-        
         solve(q , n , m , grid);
-        
         return ans;
-        
-        
     }
-    
-    
     void solve(Queue<pair>q , int n , int m ,int[][] grid){
-        int[] xdir = {0,0,-1,1,1,1,-1,-1};
-        int[] ydir = {-1,1,0,0,1,-1,1,-1};
+        int[] xdir = {0,0,-1,1};
+        int[] ydir = {-1,1,0,0};
         while(q.size()!=0){
             pair out = q.poll();
             int x = out.x;
             int y = out.y;
-            for(int i = 0 ; i < 8 ; i++){
+            for(int i = 0 ; i < 4 ; i++){
                 int newx = xdir[i] + x;
                 int newy = ydir[i] + y;
                 if(newx <0 || newy < 0 || newy >= m || newx >= n
@@ -81,18 +75,11 @@ class Solution
             }
         }
     }
-    
-    
 }
-
 class pair{
-    
     int x;int y;
-    
     pair(int x , int y){
         this.x = x;
         this.y =y;
     }
-    
-    
 }
