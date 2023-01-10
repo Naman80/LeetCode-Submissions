@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 //Initial Template for Java
 
 import java.util.LinkedList; 
@@ -105,6 +105,7 @@ class GfG {
   
 }
 
+
 // } Driver Code Ends
 
 
@@ -125,21 +126,15 @@ class Node{
 
 class Solution{
     public void toSumTree(Node root){
-        solve(root);
+         solve(root);
     }
     
-    public int[] solve(Node root){
-        if(root==null)return new int[]{0};
-        
-        int[] leftp = solve(root.left);
-        
-        int[] rightp = solve(root.right);
-        
-        int up = leftp[0] + rightp[0] + root.data;
-        
-        root.data =  leftp[0] + rightp[0];
-        
-        return new int[]{up};
-        
+    public int solve(Node root){
+        if(root==null)return 0;
+        int left = solve(root.left);
+        int right = solve(root.right);
+        int temp = root.data + left + right;
+        root.data = left + right;
+        return temp;
     }
 }
