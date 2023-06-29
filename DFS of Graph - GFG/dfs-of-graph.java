@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 // Initial Template for Java
 import java.util.*;
 import java.lang.*;
@@ -30,31 +30,32 @@ class GFG {
         }
     }
 }
+
 // } Driver Code Ends
 
 
 class Solution {
     // Function to return a list containing the DFS traversal of the graph.
     public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        // Code hereboolea
+        
         boolean[] vis = new boolean[V];
-        
-        ArrayList<Integer> al = new ArrayList<>();
-        
-        dfs(0,adj,vis,al);
-        
-        return al;
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i = 0 ; i < V ;i++){
+            if(!vis[i])solve(i , adj , vis,ans);
+        }
+        return ans;
     }
     
     
-    void dfs(int v,ArrayList<ArrayList<Integer>> adj,boolean[] vis,ArrayList<Integer> al){
-        
-        vis[v] =true;
-        al.add(v);
-        
-        for(int x: adj.get(v)){
-            if(!vis[x]){
-                dfs(x,adj,vis,al);
-                }
+    
+    void solve(int x  ,  ArrayList<ArrayList<Integer>> adj , boolean[] vis , ArrayList<Integer> ans){
+        vis[x] = true;
+        ans.add(x);
+        for(int v : adj.get(x)){
+            if(!vis[v]){
+                solve(v , adj , vis,ans);
+            }
         }
         
     }
