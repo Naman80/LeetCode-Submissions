@@ -5,7 +5,7 @@ public:
         vector<int>map(n+1, 0);
         int mx = -1;
         int mxe = -1;
-        for(int i = 0 ; i < n ; i++){
+        for(int i = 0 ; i < n ; i++){            
             map[nums[i]]++;
             mx = max(mx , map[nums[i]]);
             mxe = max(mxe , nums[i]);
@@ -18,6 +18,6 @@ public:
         }
         
         return ans;
-        
+        // tc -> O(n) + O(max_ele * most_freq_ele)
     }
 };
