@@ -17,22 +17,15 @@ public:
 //         return ans;
         
         vector<int> list;
-        
         list.push_back(nums[0]);
         for(int i = 1 ; i < n ; i++){
-            
             if(nums[i] > list[list.size()-1]){
                 list.push_back(nums[i]);
             }else{
                 auto find = lower_bound(list.begin() , list.end() , nums[i]);
-                if(find == list.end()){
-                    list[list.size()-1] = nums[i];
-                }else{
-                    int idx = find - list.begin();
-                    list[idx] = nums[i];
-                }
+                int idx = find - list.begin();
+                list[idx] = nums[i];
             }
-            
         }
         return list.size();
     }
