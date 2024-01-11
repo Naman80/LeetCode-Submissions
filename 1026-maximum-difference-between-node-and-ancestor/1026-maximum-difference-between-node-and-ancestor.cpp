@@ -13,22 +13,15 @@ class Solution {
 public:
     int ans = -1;
     int maxAncestorDiff(TreeNode* root) {
-        solve(root);
+        solve(root , root->val , root->val);
         return ans;
     }
     
-    pair<int ,int> solve(TreeNode * root){
-        if(root==NULL){
-            return {INT_MAX ,INT_MIN};
-        }
-        if(root->left ==NULL && root->right ==NULL)return{root->val , root->val};
-        auto left = solve(root->left);
-        auto right = solve(root->right);
-        int mn = min(left.first , right.first);
-        int mx = max(left.second, right.second);
-        int diff = max(abs(mn - root->val) , abs(mx - root->val));
-        ans = max(ans , diff);
-        return {min(root->val , mn) , max(root->val , mx)};
+    void solve(TreeNode * root , int mn , int mx){
+        ans = max(ans , mx - mn);
+        if(root==NULL)return;
+        solve(root->left , min(mn , root->val) , max(mx , root->val));
+        solve(root->right , min(mn , root->val) , max(mx , root->val));
     }
     
 };
