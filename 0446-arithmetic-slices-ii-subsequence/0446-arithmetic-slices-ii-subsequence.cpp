@@ -12,9 +12,6 @@ public:
                 map[i][diff] = count+map[i][diff]+1;
             }
         }
-        
         return ans;
-        
-        
     }
 };
