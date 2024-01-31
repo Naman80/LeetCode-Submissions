@@ -7,10 +7,8 @@ public:
         int i = n-1;
         while(i>=0){
             while(st.size()>0 && temp[i] >= st.top().first)st.pop();
-            if(st.size()==0)ans[i] = 0;
-            else ans[i] = st.top().second - i;
-            st.push({temp[i] , i});
-            i--;
+            if(st.size()!=0)ans[i] = st.top().second - i;
+            st.push({temp[i] , i--});
         }        
         return ans;
     }
