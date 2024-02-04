@@ -2,16 +2,22 @@ class Solution {
 public:
     int numberOfPairs(vector<vector<int>>& nums) {
         
+        // way to insert comparator in sorting function
+        // [](auto a , auto b){return ;}
+        
         int ans=  0;
         int n = nums.size();
         vector<pair<int,int>> A;
         for(auto x: nums){
             A.push_back({x[0],x[1]});
         }
-        sort(A.begin() , A.end(), [](pair<int,int> a, pair<int,int>b){
+        sort(A.begin() , A.end(), [](auto a,auto b){
             if(a.first == b.first) return a.second > b.second;
                 return a.first < b.first;
         });
+        // for(auto x : A){
+        //     cout << x.first << " " <<x.second <<  endl;
+        // }
          for (int i = 0; i < n; ++i) {
             int y = -2e9;
             for (int j = i + 1; j < n; ++j)
